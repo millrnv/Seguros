@@ -6,57 +6,74 @@ public class Empresa {
 	private List<Vendedor> vendedores;
 	private List<Seguro> seguros;
 
-	/**
-	 * 
-	 * @param cliente
-	 */
+
+
+	public Empresa(String nombre, String direccion){
+
+		nombre = this.nombre;
+		direccion = this.direccion;
+		this.clientes = new ArrayList<>();
+		this.vendedores = new ArrayList<>();
+		this.seguros = new ArrayList<>();
+
+
+	}
+
 	public void agregarCliente(Cliente cliente) {
-		// TODO - implement Empresa.agregarCliente
-		throw new UnsupportedOperationException();
+		if (!clienteExiste(cliente)) {
+			this.clientes.add(cliente);
+		} else {
+			throw new UnsupportedOperationException("El cliente ya existe.");
+		}
 	}
 
-	/**
-	 * 
-	 * @param vendedor
-	 */
+
 	public void agregarVendedor(Vendedor vendedor) {
-		// TODO - implement Empresa.agregarVendedor
-		throw new UnsupportedOperationException();
+		if (!vendedorExiste(vendedor)) {
+			this.vendedores.add(vendedores);
+		} else {
+			throw new UnsupportedOperationException("El vendedor ya existe.");
+		}
 	}
 
-	/**
-	 * 
-	 * @param rut
-	 */
+
 	public Cliente buscarCliente(String rut) {
-		// TODO - implement Empresa.buscarCliente
-		throw new UnsupportedOperationException();
+
+		for (Cliente cliente : this.clientes) {
+			if (cliente.getRut().equals(rut))
+				return cliente;
+		}
+
+		System.out.println("El cliente no existe");
+		return null;
 	}
 
-	/**
-	 * 
-	 * @param vendedor
-	 */
+
 	public void despedirVendedor(Vendedor vendedor) {
 		// TODO - implement Empresa.despedirVendedor
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param cliente
-	 * @param vendedor
-	 */
+
 	public void asegurarCliente(Cliente cliente, Vendedor vendedor) {
-		// TODO - implement Empresa.asegurarCliente
-		throw new UnsupportedOperationException();
+		if (!clienteExiste(cliente)) {
+			System.out.println("El cliente no se encuentra en nuestra empresa");
+			return;
+		}
+		for (Seguro seguro : seguros) {
+			if (seguro.getCliente().equals(cliente)) {
+				System.out.println("El cliente ya está asegurado");
+				return;
+			}
+		}
+		Seguro nuevoSeguro = new Seguro(cliente, vendedor);
+		seguros.add(nuevoSeguro);
 	}
 
-	/**
-	 * 
-	 * @param edad
-	 */
+
 	public List<Cliente> buscarClientesTerceraEdad(String edad) {
+
+
 		// TODO - implement Empresa.buscarClientesTerceraEdad
 		throw new UnsupportedOperationException();
 	}
@@ -65,10 +82,7 @@ public class Empresa {
 		return this.nombre;
 	}
 
-	/**
-	 * 
-	 * @param nombre
-	 */
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -77,31 +91,27 @@ public class Empresa {
 		return this.direccion;
 	}
 
-	/**
-	 * 
-	 * @param direccion
-	 */
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-	/**
-	 * 
-	 * @param cliente
-	 */
+
 	public boolean clienteExiste(Cliente cliente) {
-		// TODO - implement Empresa.clienteExiste
-		throw new UnsupportedOperationException();
+
+		for (Cliente c : this.clientes) {
+			if (cliente.getRut().equals(c.getRut())) {
+				return true;
+			}
+		}
+		throw new UnsupportedOperationException("El cliente no existe.");
 	}
 
 	public List<Cliente> getClientes() {
 		return this.clientes;
 	}
 
-	/**
-	 * 
-	 * @param clientes
-	 */
+
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
@@ -110,10 +120,7 @@ public class Empresa {
 		return this.vendedores;
 	}
 
-	/**
-	 * 
-	 * @param vendedores
-	 */
+
 	public void setVendedores(List<Vendedor> vendedores) {
 		this.vendedores = vendedores;
 	}
@@ -122,21 +129,20 @@ public class Empresa {
 		return this.seguros;
 	}
 
-	/**
-	 * 
-	 * @param seguros
-	 */
+
 	public void setSeguros(List<Seguro> seguros) {
 		this.seguros = seguros;
 	}
 
-	/**
-	 * 
-	 * @param vendedor
-	 */
+
 	public boolean vendedorExiste(Vendedor vendedor) {
-		// TODO - implement Empresa.vendedorExiste
-		throw new UnsupportedOperationException();
+		for (Vendedor v : this.vendedores) {
+			if (vendedor.getID().equals(v.getID())) {
+				return true;
+			}
+		}
+		throw new UnsupportedOperationException("El vendedor no existe.");
 	}
+
 
 }
