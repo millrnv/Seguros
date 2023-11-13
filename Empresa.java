@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Empresa {
 
 	private String nombre;
@@ -72,6 +75,18 @@ public class Empresa {
 
 
 	public List<Cliente> buscarClientesTerceraEdad(String edad) {
+
+		List<Cliente> clientesTerceraEdad = new Arraylist<>();
+
+		for(Cliente c : clientes){
+			if(c.getEdad(edad) >= 65){
+				clientesTerceraEdad.add(c);
+			}
+		}
+
+		return clientesTerceraEdad;
+	}
+
 
 
 		// TODO - implement Empresa.buscarClientesTerceraEdad
